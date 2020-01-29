@@ -7,11 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.util.*;
 
 /**
@@ -186,6 +182,11 @@ public class StormStatServer implements Serializable {
         }
     }
 
+    /**
+     * This loads all the buttons and images onto the screen. Each button has an event handler that calls its respective method
+     * @param panel
+     * @throws IOException
+     */
     private static void homeComponents(JPanel panel) throws IOException {
         panel.setLayout(null);
         JLabel welcome = new JLabel("Welcome to the Storm Chasers Database");
@@ -266,6 +267,10 @@ public class StormStatServer implements Serializable {
         saveAndQuit.setBounds(320, 260, 130,25);
         panel.add(saveAndQuit);
 
+        /**
+         * This button event will serialize the hashmap acting as our database to save its state so it can be reloaded later
+         * and then close the panel.
+         */
         saveAndQuit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -299,6 +304,11 @@ public class StormStatServer implements Serializable {
         });
     }
 
+    /**
+     * This creates the panel for the page that storms are added from. It uses text fields where the user inputs information and then when
+     * the confirm button is pressed it takes the data and stores it into the database
+     * @param panel
+     */
     private static void addStormComponents(JPanel panel) {
         panel.removeAll();
         panel.setLayout(null);
@@ -342,7 +352,6 @@ public class StormStatServer implements Serializable {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //TODO add code to retrieve text from JTextfields and pass to main
                 String stormName = stormNameText.getText();
                 String stormDate = stormDateText.getText();
                 String precipitation = precipitationLevelText.getText();
@@ -382,6 +391,12 @@ public class StormStatServer implements Serializable {
             }
         });
     }
+
+    /**
+     * This runs when the edit storm button is pressed on the home screen and functions similarly to the add storm method
+     * but instead of adding to the database it overwrites an existing storm
+     * @param panel
+     */
     private static void editStormComponents(JPanel panel) {
         panel.removeAll();
         panel.setLayout(null);
@@ -425,7 +440,6 @@ public class StormStatServer implements Serializable {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //TODO add code to retrieve text from JTextfields and pass to main
                 String stormName = stormNameText.getText();
                 String stormDate = stormDateText.getText();
                 String precipitation = precipitationLevelText.getText();
@@ -474,6 +488,11 @@ public class StormStatServer implements Serializable {
         });
     }
 
+    /**
+     * This runs when the remove storm button is pressed on the home screen and takes a single string input of the name
+     * of the storm you'd like to remove. If the storm exists it will be removed otherwise it sends back to home screen
+     * @param panel
+     */
     private static void removeStormComponents(JPanel panel) {
         panel.removeAll();
         panel.setLayout(null);
@@ -515,6 +534,11 @@ public class StormStatServer implements Serializable {
         });
     }
 
+    /**
+     * This method runs when look up button is pressed on the home screen and takes a single string input then passes
+     * that name to another method lookUpResults that displays the storm info
+     * @param panel
+     */
     private static void lookUpStormComponents(JPanel panel) {
         panel.removeAll();
         panel.setLayout(null);
@@ -554,6 +578,12 @@ public class StormStatServer implements Serializable {
         });
     }
 
+    /**
+     * This is a helper method to the lookUpStorm method which takes the string input from lookUpStorm and displays
+     * a new panel with the storm info. A home button will bring you back to the home screen.
+     * @param panel
+     * @param name
+     */
     private static void lookUpResults(JPanel panel, String name) {
         panel.removeAll();
         panel.updateUI();
@@ -612,6 +642,11 @@ public class StormStatServer implements Serializable {
 
     }
 
+    /**
+     * This method prints the whole database using JLabels.
+     * TODO maybe use JTables instead if possible for neater display and extra functionality
+     * @param panel
+     */
     private static void printDatabase (JPanel panel) {
         panel.removeAll();
         panel.updateUI();
